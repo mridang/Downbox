@@ -24,28 +24,30 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.*;
-import org.eclipse.swt.graphics.*;
 import java.io.*;
 
 /**
- * Class containing methods dealing with the CLI arguments
+ * Class to save and log background exceptions
  */
-public class ExecutionParams {
+public class ExceptionHandler {
 
    /**
-    * This updates the status content menu item to show that the application
-    * is currently processing a directory
+    * This logs all background exceptions to a single exception file.
+    *
+    * @param  excError  the exception that should be logged to file
     */
-    public static void processArguments() {
+    public static void saveError(Exception excError) {
 
         try {
 
-            //TODO: Parse arguments
+            FileOutputStream fosFileOutputStream = new FileOutputStream(new File("Downbox.txt"), true);
+            PrintStream pstPrintStream = new PrintStream(fosFileOutputStream);
+            excError.printStackTrace(pstPrintStream);
+            pstPrintStream.close();
+            fosFileOutputStream.close();
 
         } catch (Exception e) {
-            e.printStackTrace(); // Nothing to be handled here.
+           return;
         }
 
     }

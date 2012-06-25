@@ -74,7 +74,8 @@ public class NameCorrector {
             logger.finer(String.format("Removed links from the filename: %s", strFileName));
 
         } catch (Exception e) {
-            logger.warning("An error occurred when trying to remove the links"); //TODO: Stacktrace/Dump
+            logger.warning("An error occurred when trying to remove the links"); 
+            ExceptionHandler.saveError(e);
         } finally {
             return strFileName;
         }
@@ -116,7 +117,8 @@ public class NameCorrector {
             logger.finer(String.format("Fetched correct name: %s", strFileName));
 
         } catch (Exception e) {
-            logger.warning("An error occurred when get the movie title"); //TODO: Stacktrace/Dump
+            logger.warning("An error occurred when get the movie title");
+            ExceptionHandler.saveError(e);
         } finally {
             return strFileName;
         }
@@ -148,7 +150,8 @@ public class NameCorrector {
             logger.finer(String.format("Stripped spam words from the filename: %s", strFileName));
 
         } catch (Exception e) {
-            logger.warning("An error occurred when trying to strip spam words"); //TODO: Stacktrace/Dump
+            logger.warning("An error occurred when trying to strip spam words");
+            ExceptionHandler.saveError(e);
         } finally {
             return strFileName;
         }
@@ -173,7 +176,8 @@ public class NameCorrector {
             logger.finer(String.format("Escaped some entities from the filename: %s", strFileName));
 
         } catch (Exception e) {
-            logger.warning("An error occurred when trying to escape some entities"); //TODO: Stacktrace/Dump
+            logger.warning("An error occurred when trying to escape some entities");
+            ExceptionHandler.saveError(e);
         } finally {
             return strFileName;
         }
@@ -200,7 +204,8 @@ public class NameCorrector {
             logger.finer(String.format("Removed special characters from the filename: %s", strFileName));
 
         } catch (Exception e) {
-            logger.warning("An error occurred when trying to remove remove special characters"); //TODO: Stacktrace/Dump
+            logger.warning("An error occurred when trying to remove remove special characters");
+            ExceptionHandler.saveError(e);
         } finally {
             return strFileName;
         }
@@ -264,7 +269,8 @@ public class NameCorrector {
             logger.finer(String.format("Fetched correct name: %s", strFileName));
 
         } catch (Exception e) {
-            logger.warning("An error occurred when trying to get the album name"); //TODO: Stacktrace/Dump
+            logger.warning("An error occurred when trying to get the album name");
+            ExceptionHandler.saveError(e);
         } finally {
             return strFileName;
         }
@@ -291,7 +297,8 @@ public class NameCorrector {
             logger.finer(String.format("Removed brackets from the filename: %s", strFileName));
 
         } catch (Exception e) {
-            logger.warning("An error occurred when trying to remove the brackets"); //TODO: Stacktrace/Dump
+            logger.warning("An error occurred when trying to remove the brackets");
+            ExceptionHandler.saveError(e);
         } finally {
             return strFileName;
         }

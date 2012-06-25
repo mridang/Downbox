@@ -48,9 +48,9 @@ public class ApplicationData {
             fisFileInputStream.close();
 
         } catch (IOException e) {
-            return; //TODO: Show message and quit.
+            ExceptionHandler.saveError(e);
         } catch (IllegalArgumentException e) {
-            return; //TODO: Show message and quit.
+            ExceptionHandler.saveError(e);
         }
 
    }
@@ -87,9 +87,9 @@ public class ApplicationData {
             fisFileOutputStream.close();
 
         } catch (IOException e) {
-            return; //TODO: Show message and quit.
+            ExceptionHandler.saveError(e);
         } catch (ClassCastException e) {
-            return; //TODO: Show message and quit.
+            ExceptionHandler.saveError(e);
         }
 
    }

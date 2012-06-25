@@ -99,11 +99,11 @@ public class OpenSubtitles {
         try {
 
            logger.info(String.format("Hashing the video file: %s", filVideoFile.getName()));
-            
+
             Long lngFileSize = fchFileChannel.size();
 
             if (fchFileChannel.size() < 65536) {
-                return; //TODO: This can't be solved so we showuld maybe show a some message.
+                logger.finest("The file is too small to be hashed");
             }
 
             MappedByteBuffer mbbByteBuffer;
@@ -128,7 +128,7 @@ public class OpenSubtitles {
         catch (Exception e) {
            logger.warning(String.format("Error: %s", e.toString()));
         }
-        
+
         fchFileChannel.close();
         fisInputStream.close();
 
@@ -177,7 +177,7 @@ public class OpenSubtitles {
            logger.info(String.format("Downloading the subtitle: %s", urlSubtitle));
 
             if (objConnection.getResponseCode() != 200) {
-                return; //TODO: See if we can throw some exception here or retry
+                logger.finest("The server did not respond properly");
             }
 
             Integer intLength = 0;
@@ -212,7 +212,7 @@ public class OpenSubtitles {
             logOut();
 
         } catch (Exception e)  {
-            return; //TODO: Continue
+            return;
         }
 
     }

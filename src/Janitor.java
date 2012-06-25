@@ -36,7 +36,7 @@ class Downbox {
    /**
     * The main procedure that is called when running the application
     *
-    * @param     strArguments   the line of arguments passed to the application
+    * @param  strArguments   the line of arguments passed to the application
     */
     public static void main(String[] strArguments) {
 
@@ -54,10 +54,8 @@ class Downbox {
             try {
                 guiTray.start();
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                return; //TODO: Show error message and then quit
             } catch (Exception e) {
-                return; //TODO: Show error message and then quit
+                ExceptionHandler.saveError(e);
             }
 
             FolderMenu.getMenuItems(Paths.get(System.getProperty("user.home"), "Downloads")); //TODO: This should be a new thread
@@ -67,10 +65,8 @@ class Downbox {
             try {
                 argParser.run(StringUtils.join(strArguments));
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                return; //TODO: Show error message and then quit
             } catch (Exception e) {
-                return; //TODO: Show error message and then quit
+                ExceptionHandler.saveError(e);
             }
 
         } else {
@@ -80,10 +76,8 @@ class Downbox {
             try {
                 guiTray.start();
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                return; //TODO: Show error message and then quit
             } catch (Exception e) {
-                return; //TODO: Show error message and then quit
+                ExceptionHandler.saveError(e);
             }
 
             FolderMenu.getMenuItems(Paths.get(System.getProperty("user.home"), "Downloads")); //TODO: This should be a new thread
@@ -93,10 +87,8 @@ class Downbox {
             try {
                 bakWatcher.start();
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                return; //TODO: Show error message and then quit
             } catch (Exception e) {
-                return; //TODO: Show error message and then quit
+                ExceptionHandler.saveError(e);
             }
 
         }
