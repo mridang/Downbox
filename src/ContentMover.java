@@ -53,8 +53,8 @@ public class ContentMover {
                 if (filItem.isDirectory()) {
                     moveFiles(filItem, dirDestination, dirReference);
                 } else {
-                    if (FileExtention.isVideoFile(filItem) || FileExtention.isAudioFile(filItem) 
-                    || FileExtention.isSubtitleFile(filItem) || FileExtention.isPlaylistFile(filItem)) {
+                    if (FileExtention.isVideoFile(filItem.getName()) || FileExtention.isAudioFile(filItem.getName()) 
+                    || FileExtention.isSubtitleFile(filItem.getName()) || FileExtention.isPlaylistFile(filItem.getName())) {
                         logger.info(String.format("Moving the media file: %s", filItem.getName()));
                         dirDestination.toPath().resolve(dirReference.toPath().relativize(filItem.toPath())).toFile().getParentFile().mkdirs();
                         if (!dirDestination.toPath().resolve(dirReference.toPath().relativize(filItem.toPath())).toFile().exists()) {

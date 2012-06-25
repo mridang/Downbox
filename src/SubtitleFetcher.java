@@ -75,7 +75,7 @@ public class SubtitleFetcher {
                 if (filItem.isDirectory()) {
                     fetchSubtitles(filItem);
                 } else {
-                    if (FileExtention.isVideoFile(filItem)) {
+                    if (FileExtention.isVideoFile(filItem.getName())) {
                         OpenSubtitles.searchAndDownloadSubtitles(filItem);
                     }
                 }
