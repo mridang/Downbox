@@ -1,74 +1,66 @@
-= Janitor    
+= Downbox    
 
 Copyright (c) 2010 Mridang Agarwalla
 
-A Vuze plugin and a Java CLI application to help you with your downloaded
-torrents. It uses an inbuild, complex renaming system to rename the directory to
-the correct name. It extracts all the archives in the directory. It fetches
-subtitles for all the video files in the directory and it also tags and
-caregorises your audio files.
+Downbox is a small tray application that runs in your system tray, monitors your "Downloads" directory and automatically organises downloded media such as music and movies by renaming them, adding metadata, adding subtitles and creating playlists.
 
 == Builiding
 
 Follow these steps for initiating a build:
 
 1. From the command line, change into the application directory
-2. Download and place the dependencies in the same folder
+2. Download and place any applicationdependencies in the "lib" folder
 3. To start the build process, type "ant compile".
 
-When the build is finished, there are several resulting items:
+When the build is finished, there may be several resulting directories:
 
-* build  Directory containing the newly compiled files
-* jar    Directory containing the newly compiled files packaged in the a JAR
+* tmp: Directory containing the newly compiled files
+* jar: Directory containing the newly compiled files packaged in the a JAR
+* bin: Directory containing the executable binary
 
 It's also possible to run various parts of the build separately. For a list of 
-available targets, type "ant" on the command line.
+available targets, type "ant" on the command line. Here are few examples:
 
-* Note: It is currently not possible to build the CLI version and the Plugin
-version separately. *
+* Run "ant clean" to clean out all the build files
+* Run "ant package" to build an executable
+
+Note: Please ensure that all the Ant dependencies are fulfilled and that your are using the JDK SE 7.
 
 == Usage
 
-=== CLI Version
+In order to run the application, simply run the executable. 
 
-Fire up your shell, navigate to the directory containing Janitor and type:
-
-  clijanitor
-
-This will add the list of trackers to the torrent file.
-
-=== Plugin Version
-
-Installing the plugin into Vuze/Azereus requires a couple of steps. For a 
-thorough explanation please visit the Vuze wiki at: 
-
-http://wiki.vuze.com/w/Install_Plugins 
+I recommend building the full installer and using the installer to install into the right location. If you do not wish to build the installer, please create a folder soemwhere on your system and copy the contents of the bin folder into it.
 
 == Dependencies
 
-=== Plugin Version
+In order to compile the application from source, you will need the follwoing libraries:
 
-* You will need to compile against the Azureus code 
-  itself, which is provided in a single JAR file. You need to use either the 
-  main Azureus2.jar file or a JAR file containing just the interfaces which 
-  make up the plugin API (both of which are available from: 
-  
-  http://sourceforge.net/projects/azureus/files/
+* SWT
+* Apache Commong Logging
+* Apache Commons Lang
+* Junrar
+* Javalution
+* Apache XML-RPC
+* Jsoup
 
-* You will need to compile against the SWT library. The SWT libs can be
-  downloaded from the SWT site at:
-  
-  http://www.eclipse.org/swt/
 
-=== CLI Version
+You will also need to need to fulfil the following Ant dependencies:
 
-None
+* Launch4j should be installed, in the path, and installed as an Ant task. It can be found at http://launch4j.sourceforge.net/
+* The Ant-Contrib antlets should be installed. They can be found at http://ant-contrib.sourceforge.net/.
 
 == Configuration
 
 None
 
 == TODO
+
+* Show a little error cross mark when there's low disk space or no network connectivity
+* Add support for Linux
+* Add support for TV Shows and Games
+* Adding a file explorer context menu item to invoke Downbox manually for a directory
+* Support for modifying the settings
 
 This is beta software. Several things are on the todo list. if you'd like to see
 a new feature, please help by contributing.
