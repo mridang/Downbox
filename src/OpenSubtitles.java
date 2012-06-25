@@ -42,7 +42,7 @@ public class OpenSubtitles {
 
    /** The logger instance that will provide all the logger functionality
     */
-    private static Logger logger = Logger.getLogger("janitor");
+    private static Logger logger = Logger.getLogger("downbox");
    /** The API url of the server
     */
     private static String OSDB_SERVER = "http://api.opensubtitles.org/xml-rpc";

@@ -48,7 +48,7 @@ public class ProcessingStatus {
             public void run() {
                 try {
 
-                    InputStream istIcon = Janitor.class.getClassLoader().getResourceAsStream("traywork.ico");
+                    InputStream istIcon = Downbox.class.getClassLoader().getResourceAsStream("traywork.ico");
                     Image imgTrayIcon = new Image(SysTray.shell.getDisplay(), istIcon);
 
                     SysTray.itmTrayItem.setImage(imgTrayIcon);
@@ -77,7 +77,7 @@ public class ProcessingStatus {
             public void run() {
                 try {
 
-                    InputStream istIcon = Janitor.class.getClassLoader().getResourceAsStream("traytick.ico");
+                    InputStream istIcon = Downbox.class.getClassLoader().getResourceAsStream("traytick.ico");
                     Image imgTrayIcon = new Image(SysTray.shell.getDisplay(), istIcon);
 
                     SysTray.itmTrayItem.setImage(imgTrayIcon);

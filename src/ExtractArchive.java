@@ -34,7 +34,7 @@ public class ExtractArchive {
 
    /** The logger instance that will provide all the logger functionality
     */
-    private static Logger logger = Logger.getLogger("janitor");
+    private static Logger logger = Logger.getLogger("downbox");
 
    /**
     * Uncompresses all the RAR archives in a given directory

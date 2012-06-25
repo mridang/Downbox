@@ -1,4 +1,4 @@
-= Janitor    
+= Downbox    
 
 Copyright (c) 2010 Mridang Agarwalla
 
@@ -31,9 +31,9 @@ version separately. *
 
 === CLI Version
 
-Fire up your shell, navigate to the directory containing Janitor and type:
+Fire up your shell, navigate to the directory containing Downbox and type:
 
-  clijanitor
+  clidownbox
 
 This will add the list of trackers to the torrent file.
 

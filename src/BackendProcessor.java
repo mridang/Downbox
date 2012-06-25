@@ -32,7 +32,7 @@ public class BackendProcessor {
 
    /** The logger instance that will provide all the logger functionality
     */
-    private static Logger logger = Logger.getLogger("janitor");
+    private static Logger logger = Logger.getLogger("downbox");
 
    /* Processes a directory and extracts the files, fetches subtitles for all
     * the video files and renames the directory.

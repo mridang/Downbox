@@ -27,7 +27,7 @@
 import java.nio.file.*;
 import org.apache.commons.lang.*;
 
-class Janitor {
+class Downbox {
 
    /** The system tray class
     */

@@ -35,7 +35,7 @@ public class ContentCopier {
 
    /** The logger instance that will provide all the logger functionality
     */
-    private static Logger logger = Logger.getLogger("janitor");
+    private static Logger logger = Logger.getLogger("downbox");
 
    /**
     * Copies all the media files in the directory to the other directory.

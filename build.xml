@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Janitor" default="jar" basedir=".">
+<project name="Downbox" default="jar" basedir=".">
 
     <taskdef resource="net/sf/antcontrib/antlib.xml" />
     <taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" />

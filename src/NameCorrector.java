@@ -32,7 +32,7 @@ public class NameCorrector {
 
    /** The logger instance that will provide all the logger functionality
     */
-    private static Logger logger = Logger.getLogger("janitor");
+    private static Logger logger = Logger.getLogger("downbox");
 
    /**
     * Cleans the name of a movie filename

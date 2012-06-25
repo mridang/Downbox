@@ -35,7 +35,7 @@ public class RenameDirectory {
 
    /** The logger instance that will provide all the logger functionality
     */
-    private static Logger logger = Logger.getLogger("janitor");
+    private static Logger logger = Logger.getLogger("downbox");
 
    /**
     * Renames a directory depending upon the content type of the directory.

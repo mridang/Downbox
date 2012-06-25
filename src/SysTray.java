@@ -50,12 +50,12 @@ public class SysTray extends Thread {
         shell = new Shell(display);
 
         //Initialize the system tray
-        Image imgTrayIcon = new Image(display, Janitor.class.getClassLoader().getResourceAsStream("traytick.ico"));
+        Image imgTrayIcon = new Image(display, Downbox.class.getClassLoader().getResourceAsStream("traytick.ico"));
         Tray trySysTray = display.getSystemTray();
         final Menu mnuPopup = new Menu(shell, SWT.POP_UP);
 
         itmTrayItem = new TrayItem(trySysTray, SWT.NONE);
-        itmTrayItem.setToolTipText("Janitor");
+        itmTrayItem.setToolTipText("Downbox");
 
         itmTrayItem.addListener(SWT.MenuDetect, new Listener() {
             public void handleEvent(Event event) {
@@ -71,9 +71,9 @@ public class SysTray extends Thread {
             }
         });
 
-        MenuItem mimLaunchJanitorWebsite = new MenuItem(mnuPopup, SWT.PUSH);
-        mimLaunchJanitorWebsite.setText(LocalStrings.getText("launchWebsite"));
-        mimLaunchJanitorWebsite.addListener(SWT.Selection, new Listener() {
+        MenuItem mimLaunchDownboxWebsite = new MenuItem(mnuPopup, SWT.PUSH);
+        mimLaunchDownboxWebsite.setText(LocalStrings.getText("launchWebsite"));
+        mimLaunchDownboxWebsite.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event event) {
                 MenuEvents.launchWebsite();
             }
@@ -130,7 +130,7 @@ public class SysTray extends Thread {
         //Finalize the system tray
         mnuPopup.setDefaultItem(mimOpenFolder);
         itmTrayItem.setImage(imgTrayIcon);
-        itmTrayItem.setToolTipText("Janitor");
+        itmTrayItem.setToolTipText("Downbox");
 
         while (!shell.isDisposed()) {
             if (!display.readAndDispatch())

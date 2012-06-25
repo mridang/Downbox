@@ -32,7 +32,7 @@ public class LoggingConfiguration {
 
    /** The logger instance that will provide all the logger functionality
     */
-    private static Logger logger = Logger.getLogger("janitor");
+    private static Logger logger = Logger.getLogger("downbox");
 
    /** The custom log message format class for the UI log messages.
     */
@@ -86,7 +86,7 @@ public class LoggingConfiguration {
 
         try {
 
-            FileHandler fileHandler = new FileHandler(Paths.get(objLogDirectory.toString(), "janitor.log").toString(), true);
+            FileHandler fileHandler = new FileHandler(Paths.get(objLogDirectory.toString(), "downbox.log").toString(), true);
             fileHandler.setLevel(Level.ALL);
             fileHandler.setFormatter(new CustomLogRecordFormat());
             logger.addHandler(fileHandler);

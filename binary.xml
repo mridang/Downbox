@@ -1,8 +1,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>jar\Janitor.jar</jar>
-  <outfile>bin\Janitor.exe</outfile>
+  <jar>jar\Downbox.jar</jar>
+  <outfile>bin\Downbox.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -14,8 +14,8 @@
   <manifest></manifest>
   <icon>res\icon.ico</icon>
   <singleInstance>
-    <mutexName>Janitor</mutexName>
-    <windowTitle>Janitor</windowTitle>
+    <mutexName>Downbox</mutexName>
+    <windowTitle>Downbox</windowTitle>
   </singleInstance>
   <jre>
     <path></path>
@@ -26,13 +26,13 @@
   <versionInfo>
     <fileVersion>0.1.0.0</fileVersion>
     <txtFileVersion>0.1.0.0</txtFileVersion>
-    <fileDescription>Janitor</fileDescription>
+    <fileDescription>Downbox</fileDescription>
     <copyright>Mridang Agarwalla</copyright>
     <productVersion>0.1.0.0</productVersion>
     <txtProductVersion>0.1.0.0</txtProductVersion>
-    <productName>Janitor</productName>
+    <productName>Downbox</productName>
     <companyName></companyName>
-    <internalName>Janitor</internalName>
-    <originalFilename>Janitor.exe</originalFilename>
+    <internalName>Downbox</internalName>
+    <originalFilename>Downbox.exe</originalFilename>
   </versionInfo>
 </launch4jConfig>
