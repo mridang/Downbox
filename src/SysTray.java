@@ -105,11 +105,11 @@ public class SysTray extends Thread {
         //Separator
         MenuItem mimFourthSeparator = new MenuItem(mnuPopup, SWT.SEPARATOR);
 
-        MenuItem mimPauseCleaning = new MenuItem(mnuPopup, SWT.PUSH);
-        mimPauseCleaning.setText(LocalStrings.getText("recheckFolders"));
-        mimPauseCleaning.addListener(SWT.Selection, new Listener() {
+        MenuItem mimRecheckFolders = new MenuItem(mnuPopup, SWT.PUSH);
+        mimRecheckFolders.setText(LocalStrings.getText("recheckFolders"));
+        mimRecheckFolders.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event event) {
-                FolderMenu.getMenuItems(Paths.get(System.getProperty("user.home"), "Downloads"));
+                MenuEvents.recheckDirectory();
             }
         });
 

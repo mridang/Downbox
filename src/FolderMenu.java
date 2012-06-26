@@ -80,26 +80,7 @@ public class FolderMenu {
                     objFolderMenuItem.setText(objLocation.getFileName().toString());
                     objFolderMenuItem.addListener(SWT.Selection, new Listener() {
                         public void handleEvent(Event event) {
-                            MessageBox objPrompt = new MessageBox(SysTray.shell, SWT.ICON_QUESTION | SWT.YES | SWT.NO | SWT.CANCEL);
-                            objPrompt.setMessage(LocalStrings.getText("processPromtQuestion"));
-                            objPrompt.setText(LocalStrings.getText("processPromtTitle"));
-                            Integer intResponse = objPrompt.open();
-                            if (intResponse == SWT.NO) {
-                                FolderMenu.delMenuItem(((MenuItem) event.widget).getText());
-                            } 
-                            if (intResponse == SWT.YES) {
-                            	  final String strName = ((MenuItem) event.widget).getText();
-	                              new Thread(
-										            new Runnable() {
-										                public void run() {
-										                    try {
-										                        BackendProcessor.processDirectory(new File(Paths.get(System.getProperty("user.home"), "Downloads").toFile(), strName));
-										                    } catch (Exception e) {
-										                        e.printStackTrace();
-										                    }
-										                }
-										            }).start();
-                            }
+                            MenuEvents.processDirectory(((MenuItem) event.widget).getText());
                         }
                     });
 

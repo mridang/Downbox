@@ -79,39 +79,41 @@ public class DirectorySize {
                 lngSize += getFileSize(filItem, strExtensions);
             }
             else {
-            	  if (FileExtention.getExtention(filItem.getName()).equalsIgnoreCase("RAR")) {
-            	  	  try {
-            	  	  	  System.out.println(filItem.getName());
-		            	      for (FileHeader objHeader : (new Archive(filItem)).getFileHeaders()) {
-						                if (strExtensions == null) {
-						                    lngSize += objHeader.getFullUnpackSize();
-						                }
-						                else {
-						                    for(String strExtension : strExtensions) {
-						                        if (FileExtention.getExtention(objHeader.getFileNameString()).equalsIgnoreCase(strExtension)) {
-						                            lngSize += objHeader.getFullUnpackSize();
-						                            break;
-						                        }
-						                    }
-						                }   
-						            }
-						        } catch (Exception e) {
-						        	  System.out.println(e);
-						            continue;
-						        }
-            	  } else {
-		                if (strExtensions == null) {
-		                    lngSize += filItem.length();
-		                }
-		                else {
-		                    for(String strExtension : strExtensions) {
-		                        if (FileExtention.getExtention(filItem.getName()).equalsIgnoreCase(strExtension)) {
-		                            lngSize += filItem.length();
-		                            break;
-		                        }
-		                    }
-		                }            	  
-            	  }
+              System.out.println("---------------");
+                if (filItem.getName().matches("(?i)^((?:(?!  .part\\d+\\.rar$).)*)\\.(?:(?:part0*1\\.)?rar|r?0*1)$")) {
+                  System.out.println(filItem.getName());
+                    try {
+                        for (FileHeader objHeader : (new Archive(filItem)).getFileHeaders()) {
+                            System.out.println(objHeader.getFileNameString());
+                            if (strExtensions == null) {
+                                lngSize += objHeader.getFullUnpackSize();
+                            }
+                            else {
+                                for(String strExtension : strExtensions) {
+                                    if (FileExtention.getExtention(objHeader.getFileNameString()).equalsIgnoreCase(strExtension)) {
+                                        System.out.println("ok");
+                                        lngSize += objHeader.getFullUnpackSize();
+                                        break;
+                                    }
+                                }
+                            }   
+                        }
+                    } catch (Exception e) {
+                        continue;
+                    }
+                } else {
+                    if (strExtensions == null) {
+                        lngSize += filItem.length();
+                    }
+                    else {
+                        for(String strExtension : strExtensions) {
+                            if (FileExtention.getExtention(filItem.getName()).equalsIgnoreCase(strExtension)) {
+                                lngSize += filItem.length();
+                                break;
+                            }
+                        }
+                    }                
+                }
             }
         }
 

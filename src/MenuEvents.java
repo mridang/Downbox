@@ -35,20 +35,50 @@ public class MenuEvents {
 
    /**
     * This launches the website.
-    *
-    * @returns
     */
-   public static void launchWebsite() {
+    public static void launchWebsite() {
 
-       Program.launch("http://mridang.github.com/projects/downbox/");
+        Program.launch("http://mridang.github.com/projects/downbox/");
 
-   }
+    }
+
+
+   /**
+    * This starts the backend processor to proecess a directory
+    *
+    * @param   evtEvent   the event that triggered this function
+    */
+    public static void processDirectory(final String strDirectory) {
+
+        MessageBox objPrompt = new MessageBox(SysTray.shell, SWT.ICON_QUESTION | SWT.YES | SWT.NO | SWT.CANCEL);
+        objPrompt.setMessage(LocalStrings.getText("processPromtQuestion"));
+        objPrompt.setText(LocalStrings.getText("processPromtTitle"));
+
+        Integer intResponse = objPrompt.open();
+
+        if (intResponse == SWT.NO) {
+            FolderMenu.delMenuItem(strDirectory);
+        }
+        if (intResponse == SWT.YES) {
+
+            new Thread(
+                new Runnable() {
+                    public void run() {
+                        try {
+                            BackendProcessor.processDirectory(new File(Paths.get(System.getProperty("user.home"), "Downloads").toFile(), strDirectory));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            ).start();
+        }
+
+    }
 
 
    /**
     * This quits the application
-    *
-    * @returns
     */
     public static void quitApplication() {
 
@@ -74,14 +104,42 @@ public class MenuEvents {
 
 
    /**
-    * This opens the folder.
-    *
-    * @returns
+    * This rescans a directory for any new files
     */
-   public static void openFolder() {
+    public static void recheckDirectory() {
 
-       Program.launch(Paths.get(System.getProperty("user.home"), "Downloads").toString());
+        MessageBox objPrompt = new MessageBox(SysTray.shell, SWT.ICON_QUESTION | SWT.OK | SWT.CANCEL);
+        objPrompt.setMessage(LocalStrings.getText("recheckPromtQuestion"));
+        objPrompt.setText(LocalStrings.getText("recheckPromtTitle"));
 
-   }
+        Integer intResponse = objPrompt.open();
+
+        if (intResponse == SWT.CANCEL) {
+            //FolderMenu.delMenuItem(((MenuItem) event.widget).getText());
+        }
+        if (intResponse == SWT.OK) {
+            new Thread(
+                new Runnable() {
+                    public void run() {
+                        try {
+                            
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            ).start();
+        }
+    }
+
+
+   /**
+    * This opens the folder.
+    */
+    public static void openFolder() {
+
+        Program.launch(Paths.get(System.getProperty("user.home"), "Downloads").toString());
+
+    }
 
 }

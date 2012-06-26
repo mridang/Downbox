@@ -108,8 +108,8 @@ public class NameCorrector {
                 BestMatch objMatch = MovieSearcher.getBestMatch(strQuery);
                 
                 if (objMatch != null) {
-		                strFileName = objMatch.getTitle();
-		                break;
+                    strFileName = objMatch.getTitle();
+                    break;
                 }
 
             }
@@ -260,8 +260,8 @@ public class NameCorrector {
                 BestMatch objMatch = MusicSearcher.getBestMatch(strQuery);
                 
                 if (objMatch != null) {
-		                strFileName = objMatch.getTitle();
-		                break;
+                    strFileName = objMatch.getTitle();
+                    break;
                 }
 
             }

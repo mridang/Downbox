@@ -45,8 +45,8 @@ public class ExtractArchive {
     public static void extractArchives(File objSourceDirectory, File objDestinationDirectory) throws Exception {
 
         try {
-        	
-        	  logger.info(String.format("Extracting files in: %s", objSourceDirectory));
+          
+            logger.info(String.format("Extracting files in: %s", objSourceDirectory));
 
             for (File filItem : objSourceDirectory.listFiles()) {
                 if (filItem.isDirectory()) {

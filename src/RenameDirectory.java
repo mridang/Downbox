@@ -53,13 +53,13 @@ public class RenameDirectory {
             File dirNewDirectory = null;
             
             if ((DirectorySize.getSizeOfVideoFiles(dirDirectory) * 100L / lngDirectorySize) > 75) {
-            	  logger.fine("It seems to be a movie directory.");
+                logger.fine("It seems to be a movie directory.");
                 String strName = NameCorrector.correctMovieName(dirDirectory.getName());
                 dirNewDirectory = Paths.get(System.getProperty("user.home"), "Movies", strName).toFile();
                 dirNewDirectory.mkdirs();
             }
             else if ((DirectorySize.getSizeOfAudioFiles(dirDirectory) * 100L / lngDirectorySize) > 75) {
-            	  logger.fine("It seems to be a music directory.");
+                logger.fine("It seems to be a music directory.");
                 String strName =  NameCorrector.correctAlbumName(dirDirectory.getName());
                 dirNewDirectory = Paths.get(System.getProperty("user.home"), "Music", strName).toFile();
                 dirNewDirectory.mkdirs();
@@ -70,7 +70,7 @@ public class RenameDirectory {
             return dirNewDirectory;
 
         } catch (Exception e) {
-        	  e.printStackTrace();
+            e.printStackTrace();
             logger.severe(e.toString());
         }
         
