@@ -1,5 +1,5 @@
 /*
- *  (c) Copyright (c) 2010 Mridang Agarwalla
+ *  (c) Copyright (c) 2012 Mridang Agarwalla
  *  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,8 +32,6 @@ public class DirectoryMonitor extends Thread {
 
    /**
     * This monitors the directory and raises events.
-    *
-    * @returns
     */
     public void run() {
 

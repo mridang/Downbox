@@ -1,5 +1,5 @@
 /*
- *  (c) Copyright (c) 2010 Mridang Agarwalla
+ *  (c) Copyright (c) 2012 Mridang Agarwalla
  *  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -53,7 +53,7 @@ public class ContentCopier {
                 if (filItem.isDirectory()) {
                     copyFiles(filItem, dirDestination, dirReference);
                 } else {
-                    if (FileExtention.isVideoFile(filItem.getName()) || FileExtention.isAudioFile(filItem.getName()) 
+                    if (FileExtention.isVideoFile(filItem.getName()) || FileExtention.isAudioFile(filItem.getName())
                     || FileExtention.isSubtitleFile(filItem.getName()) || FileExtention.isPlaylistFile(filItem.getName())) {
                         logger.info(String.format("Copying the media file: %s", filItem.getName()));
                         dirDestination.toPath().resolve(dirReference.toPath().relativize(filItem.toPath())).toFile().getParentFile().mkdirs();

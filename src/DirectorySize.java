@@ -1,5 +1,5 @@
 /*
- *  (c) Copyright (c) 2010 Mridang Agarwalla
+ *  (c) Copyright (c) 2012 Mridang Agarwalla
  *  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -80,7 +80,7 @@ public class DirectorySize {
             }
             else {
               System.out.println("---------------");
-                if (filItem.getName().matches("(?i)^((?:(?!  .part\\d+\\.rar$).)*)\\.(?:(?:part0*1\\.)?rar|r?0*1)$")) {
+                if (filItem.getName().matches("^((?!\\.part(?!0*[2-9]\\.rar$)\\d+\\.rar$).)*\\.(?:rar|r?0*[2-9])$")) {
                   System.out.println(filItem.getName());
                     try {
                         for (FileHeader objHeader : (new Archive(filItem)).getFileHeaders()) {

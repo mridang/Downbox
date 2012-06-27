@@ -1,5 +1,5 @@
 /*
- *  (c) Copyright (c) 2010 Mridang Agarwalla
+ *  (c) Copyright (c) 2012 Mridang Agarwalla
  *  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,7 +28,6 @@ import java.io.*;
 import java.util.logging.Logger;
 import java.nio.*;
 import java.nio.file.*;
-
 import de.innosystec.unrar.Archive;
 import de.innosystec.unrar.exception.RarException;
 import de.innosystec.unrar.rarfile.FileHeader;
@@ -45,8 +44,9 @@ public class RarExtractor {
    /**
     * Uncompresses all the RAR archives in a given directory
     *
-    * @param  objSourceDirectory        the source directory
-    * @param  objDestinationDirectory   the destination directory
+    * @param    objSourceDirectory        the source directory
+    * @param    objDestinationDirectory   the destination directory
+    * @throws                             any exceptions encountered
     */
     public static void extractFiles(File objArchive, File objDestinationDirectory) throws Exception {
 
@@ -61,7 +61,7 @@ public class RarExtractor {
 
                 if (!objHeader.isDirectory()) {
 
-                    File objFile = new File(objDestinationDirectory, objHeader.isUnicode() ? objHeader.getFileNameW() : objHeader.getFileNameString());
+                    File objFile = new File(objDestinationDirectory, objHeader.getFileNameString());
                     objFile.getParentFile().mkdirs();
                     objFile.createNewFile();
 
@@ -74,7 +74,7 @@ public class RarExtractor {
                 objHeader = archive.nextFileHeader();
 
             }
-            
+
             logger.fine("Extracted.");
 
         } catch (RarException e) {
