@@ -42,6 +42,7 @@ public class ContentMover {
     *
     * @param  dirSourceDirectory       the source directory
     * @param  dirDestinationDirectory  the destination directory
+    * @throws                          any exceptions encountered
     */
     public static void moveFiles(File dirSource, File dirDestination, File dirReference) throws Exception {
 
