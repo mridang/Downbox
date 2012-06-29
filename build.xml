@@ -5,6 +5,8 @@
     <taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" />
 
     <!-- Globals -->
+    <property name="title" value="Downbox" />
+    <property name="version" value="0.1" />
     <property name="src.dir" location="src"/>
     <property name="tmp.dir" location="tmp"/>
     <property name="jar.dir" location="jar"/>
@@ -12,6 +14,7 @@
     <property name="lib.dir" location="lib"/>
     <property name="bin.dir" location="bin"/>
     <property name="cfg.dir" location="cfg"/>
+    <property name="pkg.dir" location="pkg"/>
 
     <!-- Paths -->
     <path id="classpath">
@@ -91,21 +94,21 @@
 
     <!-- Jar it -->
     <target name="jar" depends="copy">
-        <jar destfile="${jar.dir}/${ant.project.name}.jar">
+        <jar destfile="${jar.dir}/${title}.jar">
             <fileset dir="${tmp.dir}"/>
             <fileset dir="${res.dir}" />
             <manifest>
-                <attribute name="Main-Class" value="${ant.project.name}"/>
+                <attribute name="Main-Class" value="${title}"/>
             </manifest>
         </jar>
     </target>
 
     <!-- Run it -->
     <target name="execute" depends="jar">
-        <java fork="true" classname="${ant.project.name}" dir="${jar.dir}">
+        <java fork="true" classname="${title}" dir="${jar.dir}">
             <classpath>
                 <path refid="classpath"/>
-                <path location="${jar.dir}/${ant.project.name}.jar"/>
+                <path location="${jar.dir}/${title}.jar"/>
             </classpath>
         </java>
     </target>
@@ -118,9 +121,39 @@
         <delete dir="${bin.dir}"/>
     </target>
 
-    <!-- Package it -->
-    <target name="package" depends="jar">
-        <launch4j configFile="binary.xml"/>
+        <!--<launch4j configFile="binary.xml"/>-->
+
+    <!-- Package it into a Macintosh application -->
+    <target name="appbundle" depends="jar" description="Build a Macintosh app bundle">
+        <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="app/jarbundler.jar" />
+
+        <jarbundler dir="${pkg.dir}" name="${title}" version="${version}" build="${version}" bundleid="downbox" jar="${jar.dir}/Downbox.jar" stubfile="app/JavaApplicationStub" workingdirectory="$APP_PACKAGE/Contents/Resources/Java" mainclass="Downbox" jvmversion="1.7+" vmoptions="-Xmx256m">
+            <resourcefileset dir="${cfg.dir}" includes="*"/>
+            <resourcefileset dir="app" includes="*.icns"/>
+            <execfileset dir="app" includes="install.sh"/>
+            <execfileset dir="app" includes="downbox"/>
+        </jarbundler>
+
+        <tar destfile="${title}_${version}.app.tar">
+            <tarfileset dir="pkg" includes="${title}.app/**" excludes="**/MacOS/**" />
+            <tarfileset dir="pkg" includes="${title}.app/**/MacOS/**" filemode="755" />
+        </tar>
+
     </target>
+
+    <!-- Package it into a Macintosh application -->
+    <target name="debpackage" depends="jar" description="Build a Debian deb pacakage">
+        <taskdef resource="ant_deb_task.properties" classpath="deb/ant-deb.jar" />
+
+        <deb todir="." package="downbox" version="${version}" section="misc" depends="sun-java7-jre" homepage="http://downbox.github.net" priority="optional" postinst="deb/postinst.sh" prerm="deb/prerem.sh" maintainer="Mridang Agarwalla">
+            <description synopsis="Small, lightweight, automated downloads organiser">Downbox</description>
+            <tarfileset fullpath="usr/share/filebot/Downbox.jar" file="${jar.dir}/Downbox.jar" />
+            <tarfileset prefix="usr/share/filebot" file="deb/icon.svg" />
+            <tarfileset prefix="usr/share/filebot/bin" file="deb/filebot.sh" filemode="755" />
+            <tarfileset prefix="usr/share/applications" file="deb/FileBot.desktop" />
+        </deb>
+
+    </target>
+
 
 </project>
