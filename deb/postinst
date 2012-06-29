@@ -1,0 +1,2 @@
+#!/bin/sh
+ln -s /usr/share/downbox/bin/downbox.sh /usr/bin/downbox
