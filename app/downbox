@@ -1,0 +1,7 @@
+#!/bin/bash
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
+dir_bin="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+dir_app=$dir_bin/../Resources/Java
+java -Dunixfs=false -Djava.awt.headless=true -Xmx256m -Dapplication.deployment=app "-Djna.library.path=$dir_app" "-Djava.library.path=$dir_app" -jar "$dir_app/FileBot.jar" "$@"
