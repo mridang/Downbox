@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Name="Downbox" Manufacturer="Mridang Agarwalla" Version="$(var.version)" Id="C171FBBE-E471-4509-AA63-DB2FB61F778E" UpgradeCode="FD96D8C9-9194-4C7B-9DE7-9437D0F57330" Language="1033" Codepage="1252">
+        <Package Id="*" Keywords="Installer" Description="Downbox Installer" Manufacturer="Mridang Agarwalla" InstallerVersion="200" Languages="1033" Compressed="yes" SummaryCodepage="1252" />
+        <Media Id="1" Cabinet="Downbox.cab" EmbedCab="yes" />
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder" Name="PFiles">
+                <Directory Id="INSTALLDIR" Name="Downbox">
+                    <Component Id="ApplicationStub" Guid="A7B21026-DA54-4AF8-9227-188565AB9C4E">
+                        <File Id="downbox.exe" Name="downbox.exe" Source="pkg/downbox.exe" KeyPath="yes">
+                            <Shortcut Id="shortcut.menu.downbox" Directory="ProgramMenuDir" Name="Downbox" Description="The ultimate downloads organiser" WorkingDirectory="INSTALLDIR" Icon="icon.ico" IconIndex="0" Advertise="no" />
+                            <Shortcut Id="shortcut.desktop" Directory="DesktopFolder" Name="Downbox" Description="The ultimate downloads organiser" WorkingDirectory="INSTALLDIR" Icon="icon.ico" IconIndex="0" Advertise="no" />
+                            <Shortcut Id="StartupShortcut" Name="Downbox" Icon="icon.ico" IconIndex="0" WorkingDirectory="INSTALLDIR" Advertise="no" Description="The ultimate downloads organiser" Directory="StartupFolder" />
+                        </File>
+                        <File Id="properties.ini" Name="properties.ini" Source="cfg/properties.ini" />
+                        <Shortcut Id="shortcut.uninstall" Directory="ProgramMenuDir" Name="Uninstall" Description="Uninstall Downbox" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Advertise="no" Icon="icon.ico" IconIndex="0" />
+                    </Component>
+                </Directory>
+            </Directory>
+            <Directory Id="ProgramMenuFolder" Name="Programs">
+                <Directory Id="ProgramMenuDir" Name="Downbox">
+                    <Component Id="ProgramMenuDir" Guid="F3F0F1CB-E282-473A-BE8E-B7D325B3B4B0">
+                        <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+                    </Component>
+                </Directory>
+            </Directory>
+            <Directory Id="DesktopFolder" Name="Desktop">
+            </Directory>
+            <Directory Id="AppDataFolder" Name="AppDataFolder">
+                <Directory Id="AppDataDir" Name="Downbox">
+                    <Component Id="ConfigDir" Guid="192CD3CA-0BCB-4954-A785-9B1A1B4379E6">
+                        <File Id="settings.cfg" Name="settings.cfg" Source="cfg/settings.cfg" />
+                        <File Id="folders.lst" Name="folders.lst" Source="cfg/folders.lst" />
+                    </Component>
+                </Directory>
+            </Directory>
+            <Directory Id="StartupFolder" Name="Startup" />
+        </Directory>
+        <Feature Id="Complete" Title="Downbox" Description="The complete package." Display="expand" ConfigurableDirectory="INSTALLDIR" Level="1">
+            <ComponentRef Id="ApplicationStub" />
+            <ComponentRef Id="ProgramMenuDir" />
+        </Feature>
+        <UIRef Id="WixUI_InstallDir" />
+        <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+        <WixVariable Id="WixUIBannerBmp" Value="msi/banner.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="msi/dialog.bmp" />
+        <WixVariable Id="WixUILicenseRtf" Value="msi/license.rtf" />
+        <Icon Id="icon.ico" SourceFile="msi/icon.ico" />
+        <Property Id="ARPPRODUCTICON" Value="msi/icon.ico" />
+        <Property Id="LicenseAccepted" Value="1" />
+        <UI>
+        </UI>
+    </Product>
+</Wix>
