@@ -123,8 +123,10 @@
 
         <!--<launch4j configFile="binary.xml"/>-->
 
-    <!-- Package it into a Macintosh application -->
-    <target name="appbundle" depends="jar" description="Build a Macintosh app bundle">
+    <target name="distribute" depends="jar" description="Build an os specific distribution file">
+
+        <!-- Package it into a Macintosh application -->
+        
         <taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler" classpath="app/jarbundler.jar" />
 
         <jarbundler dir="${pkg.dir}" name="${title}" version="${version}" build="${version}" bundleid="downbox" jar="${jar.dir}/Downbox.jar" stubfile="app/JavaApplicationStub" workingdirectory="$APP_PACKAGE/Contents/Resources/Java" mainclass="Downbox" jvmversion="1.7+" vmoptions="-Xmx256m">
@@ -139,21 +141,32 @@
             <tarfileset dir="pkg" includes="${title}.app/**/MacOS/**" filemode="755" />
         </tar>
 
-    </target>
 
-    <!-- Package it into a Macintosh application -->
-    <target name="debpackage" depends="jar" description="Build a Debian deb pacakage">
+        <!-- Package it into a Debian package -->
+        
         <taskdef resource="ant_deb_task.properties" classpath="deb/ant-deb.jar" />
 
         <deb todir="." package="downbox" version="${version}" section="misc" depends="sun-java7-jre" homepage="http://downbox.github.net" priority="optional" postinst="deb/postinst.sh" prerm="deb/prerem.sh" maintainer="Mridang Agarwalla">
             <description synopsis="Small, lightweight, automated downloads organiser">Downbox</description>
-            <tarfileset fullpath="usr/share/filebot/Downbox.jar" file="${jar.dir}/Downbox.jar" />
-            <tarfileset prefix="usr/share/filebot" file="deb/icon.svg" />
-            <tarfileset prefix="usr/share/filebot/bin" file="deb/filebot.sh" filemode="755" />
-            <tarfileset prefix="usr/share/applications" file="deb/FileBot.desktop" />
+            <tarfileset fullpath="usr/share/downbox/Downbox.jar" file="${jar.dir}/Downbox.jar" />
+            <tarfileset prefix="usr/share/downbox" file="deb/icon.svg" />
+            <tarfileset prefix="usr/share/downbox/bin" file="deb/downbox.sh" filemode="755" />
+            <tarfileset prefix="usr/share/applications" file="deb/Downbox.desktop" />
         </deb>
 
-    </target>
 
+        <!-- Package it into a Windows installer -->
+       
+        <launch4j configFile="msi/executable.xml"/>
+       
+        <exec executable="candle.exe" dir="." failonerror="true">
+            <arg line="msi/installer.xml -out pkg/msi.wixobj -arch x86 -dversion=${version}"/>
+        </exec>
+       
+        <exec executable="light.exe" dir="." failonerror="true">
+            <arg line="pkg/msi.wixobj -sval -ext WixUIExtension -out ${title}_${version}_x86.msi" />
+        </exec>
+       
+    </target>
 
 </project>

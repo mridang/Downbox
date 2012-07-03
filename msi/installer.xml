@@ -13,7 +13,7 @@
                             <Shortcut Id="StartupShortcut" Name="Downbox" Icon="icon.ico" IconIndex="0" WorkingDirectory="INSTALLDIR" Advertise="no" Description="The ultimate downloads organiser" Directory="StartupFolder" />
                         </File>
                         <File Id="properties.ini" Name="properties.ini" Source="cfg/properties.ini" />
-                        <Shortcut Id="shortcut.uninstall" Directory="ProgramMenuDir" Name="Uninstall" Description="Uninstall Downbox" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Advertise="no" Icon="icon.ico" IconIndex="0" />
+                        <Shortcut Id="shortcut.uninstall" Directory="ProgramMenuDir" Name="Uninstall" Description="Uninstall Downbox" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Advertise="no" />
                     </Component>
                 </Directory>
             </Directory>
@@ -39,6 +39,7 @@
         <Feature Id="Complete" Title="Downbox" Description="The complete package." Display="expand" ConfigurableDirectory="INSTALLDIR" Level="1">
             <ComponentRef Id="ApplicationStub" />
             <ComponentRef Id="ProgramMenuDir" />
+            <ComponentRef Id="ConfigDir" />
         </Feature>
         <UIRef Id="WixUI_InstallDir" />
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
