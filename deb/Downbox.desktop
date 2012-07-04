@@ -2,8 +2,8 @@
 Version=1.0
 Type=Application
 Terminal=false
-Name=FileBot
-Comment=The ultimate tv renamer / subtitle downloader / sfv validator
-Exec=/usr/share/filebot/bin/filebot.sh
-Icon=/usr/share/filebot/icon.svg
-Categories=AudioVideo;Video;Renamer
+Name=Downbox
+Comment=The ultimate downloads organiser
+Exec=/usr/share/downbox/bin/downbox.sh
+Icon=/usr/share/downbox/icon.svg
+Categories=Downloads;Media;Torrent;Organiser
