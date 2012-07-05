@@ -146,7 +146,7 @@
         
         <taskdef resource="ant_deb_task.properties" classpath="deb/ant-deb.jar" />
 
-        <deb todir="." package="downbox" version="${version}" section="misc" depends="sun-java7-jre" homepage="http://downbox.github.net" priority="optional" preinst="deb/preinst" postinst="deb/postinst" prerm="deb/prerem" maintainer="Mridang Agarwalla">
+        <deb todir="." package="downbox" version="${version}" section="misc" depends="sun-java7-jre" homepage="http://downbox.github.net" priority="optional" preinst="deb/preinst" postinst="deb/postinst" postrm="deb/postrm" prerm="deb/prerm" maintainer="Mridang Agarwalla">
             <description synopsis="Small, lightweight, automated downloads organiser">Downbox</description>
             <tarfileset fullpath="usr/share/downbox/Downbox.jar" file="${jar.dir}/Downbox.jar" />
             <tarfileset prefix="usr/share/downbox" file="deb/icon.svg" />
