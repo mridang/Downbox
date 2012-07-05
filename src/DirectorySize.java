@@ -79,19 +79,15 @@ public class DirectorySize {
                 lngSize += getFileSize(filItem, strExtensions);
             }
             else {
-              System.out.println("---------------");
-                if (filItem.getName().matches("^((?!\\.part(?!0*[2-9]\\.rar$)\\d+\\.rar$).)*\\.(?:rar|r?0*[2-9])$")) {
-                  System.out.println(filItem.getName());
+                if (ArchiveChecker.isArchive(filItem)) {
                     try {
                         for (FileHeader objHeader : (new Archive(filItem)).getFileHeaders()) {
-                            System.out.println(objHeader.getFileNameString());
                             if (strExtensions == null) {
                                 lngSize += objHeader.getFullUnpackSize();
                             }
                             else {
                                 for(String strExtension : strExtensions) {
                                     if (FileExtention.getExtention(objHeader.getFileNameString()).equalsIgnoreCase(strExtension)) {
-                                        System.out.println("ok");
                                         lngSize += objHeader.getFullUnpackSize();
                                         break;
                                     }
