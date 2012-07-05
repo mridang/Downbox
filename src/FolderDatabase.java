@@ -44,7 +44,14 @@ public class FolderDatabase {
 
         try {
 
-              FileInputStream objFileInputStream = new FileInputStream("folders.lst");
+              FileInputStream objFileInputStream;
+              if ((new File("folders.lst")).exists()) {
+                  File filFolders = new File("folders.lst");
+                  objFileInputStream = new FileInputStream(filFolders);
+              } else {
+                  File filFolders = new File(DataDirectory.getDefaultDataDirectory(), "folders.lst");
+                  objFileInputStream = new FileInputStream(filFolders);
+              }
               ObjectInputStream objObjectInputStream = new ObjectInputStream(objFileInputStream);
               objFolders = (ArrayList) objObjectInputStream.readObject();
               objObjectInputStream.close();
@@ -108,7 +115,14 @@ public class FolderDatabase {
 
         try {
 
-              FileOutputStream objFileOutputStream = new FileOutputStream("folders.lst");
+              FileOutputStream objFileOutputStream;
+              if ((new File("folders.lst")).exists()) {
+                  File filFolders = new File("folders.lst");
+                  objFileOutputStream = new FileOutputStream(filFolders);
+              } else {
+                  File filFolders = new File(DataDirectory.getDefaultDataDirectory(), "folders.lst");
+                  objFileOutputStream = new FileOutputStream(filFolders);
+              }
               ObjectOutputStream objObjectOutputStream = new ObjectOutputStream(objFileOutputStream);
               objObjectOutputStream.writeObject(objFolders);
               objObjectOutputStream.close();
