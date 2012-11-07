@@ -67,7 +67,7 @@ public class FolderDatabase {
                   objFileInputStream = new FileInputStream(filFolders);
               }
               ObjectInputStream objObjectInputStream = new ObjectInputStream(objFileInputStream);
-              objFolders = (ArrayList) objObjectInputStream.readObject();
+              objFolders = (ArrayList<String>) objObjectInputStream.readObject();
               objObjectInputStream.close();
 
         } catch (FileNotFoundException e) {
@@ -90,11 +90,11 @@ public class FolderDatabase {
     */
     public static void delFolder(String strFolderName) {
 
-        Iterator objLooper = objFolders.iterator();
+        Iterator<String> objLooper = objFolders.iterator();
 
         while(objLooper.hasNext()) {
 
-            String strElement = (String) objLooper.next();
+            String strElement = objLooper.next();
 
             if(strElement.equals(strFolderName)) {
 
@@ -161,11 +161,11 @@ public class FolderDatabase {
     */
     public static Boolean hasFolder(String strFolderName) {
 
-        Iterator objLooper = objFolders.iterator();
+        Iterator<String> objLooper = objFolders.iterator();
 
         while(objLooper.hasNext()) {
 
-            String strElement = (String) objLooper.next();
+            String strElement = objLooper.next();
 
             if(strElement.equals(strFolderName)) {
 
