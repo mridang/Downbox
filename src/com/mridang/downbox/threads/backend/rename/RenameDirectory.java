@@ -27,6 +27,7 @@ package com.mridang.downbox.threads.backend.rename;
 */
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.logging.Logger;
 
 import com.mridang.downbox.helpers.DirectorySize;
@@ -52,7 +53,7 @@ public class RenameDirectory {
 
             logger.info(String.format("Renaming the directory at: %s", dirDirectory.getPath()));
 
-            Long lngDirectorySize = DirectorySize.getFileSize(dirDirectory, null);
+            Long lngDirectorySize = DirectorySize.getFileSize(dirDirectory, null, new HashSet<String>());
             File dirNewDirectory = null;
 
             if ((DirectorySize.getSizeOfVideoFiles(dirDirectory) * 100L / lngDirectorySize) > 75) {

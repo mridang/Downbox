@@ -26,6 +26,7 @@ package com.mridang.downbox.helpers;
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 import java.io.File;
+import java.util.HashSet;
 
 import com.mridang.downbox.threads.FolderDatabase;
 
@@ -41,7 +42,7 @@ public class DirectoryChecker {
 
         try {
 
-            Long lngDirectorySize = DirectorySize.getFileSize(dirDirectory, null);
+            Long lngDirectorySize = DirectorySize.getFileSize(dirDirectory, null, new HashSet<String>());
 
             if (FolderDatabase.hasFolder(dirDirectory.getName()) == false && lngDirectorySize > 0L) {
 

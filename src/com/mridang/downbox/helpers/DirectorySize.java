@@ -26,6 +26,7 @@ package com.mridang.downbox.helpers;
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 import java.io.File;
+import java.util.HashSet;
 
 import com.mridang.downbox.threads.ApplicationData;
 
@@ -48,7 +49,7 @@ public class DirectorySize {
 
         subtitleExtensions = ApplicationData.getProperty("filename.subtitle.types").split(", ");
 
-        return getFileSize(dirDirectory, subtitleExtensions);
+        return getFileSize(dirDirectory, subtitleExtensions, new HashSet<String>());
     }
 
 
@@ -63,7 +64,7 @@ public class DirectorySize {
 
         audioExtensions = ApplicationData.getProperty("filename.audio.types").split(", ");
 
-        return getFileSize(dirDirectory, audioExtensions);
+        return getFileSize(dirDirectory, audioExtensions, new HashSet<String>());
     }
 
 
@@ -75,12 +76,13 @@ public class DirectorySize {
     * @param   setProcessed  the set of processed filenames
     * @returns              the size of the directory
     */
-    public static Long getFileSize(File dirDirectory, String[] strExtensions) {
+    public static Long getFileSize(File dirDirectory, String[] strExtensions, HashSet<String> setProcessed) {
         Long lngSize = new Long(0);
+        HashSet<String> setFilenames = new HashSet<String>();
 
         for (File filItem : dirDirectory.listFiles()) {
             if (filItem.isDirectory()) {
-                lngSize += getFileSize(filItem, strExtensions);
+                lngSize += getFileSize(filItem, strExtensions, setFilenames);
             }
             else {
 
@@ -93,8 +95,13 @@ public class DirectorySize {
                             else {
                                 for(String strExtension : strExtensions) {
                                     if (FileExtention.getExtention(objHeader.getFileNameString()).equalsIgnoreCase(strExtension)) {
-                                		lngSize += objHeader.getFullUnpackSize();
-                                		break;
+                                    	if (setProcessed.contains(objHeader.getFileNameString())) {
+                                    		continue;
+                                    	} else {
+                                    		lngSize += objHeader.getFullUnpackSize();
+                                    		setProcessed.add(objHeader.getFileNameString());
+                                    		break;
+                                    	}
                                     }
                                 }
                             }
@@ -109,8 +116,13 @@ public class DirectorySize {
                     else {
                         for(String strExtension : strExtensions) {
                             if (FileExtention.getExtention(filItem.getName()).equalsIgnoreCase(strExtension)) {
-                        		lngSize += filItem.length();
-                        		break;
+                            	if (setProcessed.contains(filItem.getName())) {
+                            		continue;
+                            	} else {
+                            		lngSize += filItem.length();
+                            		setProcessed.add(filItem.getName());
+                            		break;
+                            	}
                             }
                         }
                     }
@@ -133,7 +145,7 @@ public class DirectorySize {
 
         videoExtensions = ApplicationData.getProperty("filename.video.types").split(", ");
 
-        return getFileSize(dirDirectory, videoExtensions);
+        return getFileSize(dirDirectory, videoExtensions, new HashSet<String>());
     }
 
 
@@ -148,7 +160,7 @@ public class DirectorySize {
 
         playlistExtensions = ApplicationData.getProperty("filename.playlist.types").split(", ");
 
-        return getFileSize(dirDirectory, playlistExtensions);
+        return getFileSize(dirDirectory, playlistExtensions, new HashSet<String>());
     }
 
 }
