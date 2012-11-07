@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Downbox" default="jar" basedir=".">
 
-    <taskdef resource="net/sf/antcontrib/antlib.xml" />
-    <taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" />
+    <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="ant/ant-contrib-1.0b3.jar" />
+    <taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="ant/launch4j.jar" />
 
     <!-- Globals -->
     <property name="title" value="Downbox" />
