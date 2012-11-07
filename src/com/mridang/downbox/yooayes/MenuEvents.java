@@ -50,7 +50,7 @@ public class MenuEvents {
 
 
    /**
-    * This starts the backend processor to proecess a directory
+    * This starts the backend processor to process a directory
     *
     * @param   evtEvent   the event that triggered this function
     */
@@ -69,7 +69,8 @@ public class MenuEvents {
 
             new Thread(
                 new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         try {
                             ProcessingStatus.disableMenu();
                             BackendProcessor.processDirectory(new File(Paths.get(System.getProperty("user.home"), "Downloads").toFile(), strDirectory));
@@ -128,7 +129,8 @@ public class MenuEvents {
         if (intResponse == SWT.OK) {
             new Thread(
                 new Runnable() {
-                    public void run() {
+                    @Override
+					public void run() {
                         try {
                             ProcessingStatus.disableMenu();
                             ProcessingStatus.enableMenu();

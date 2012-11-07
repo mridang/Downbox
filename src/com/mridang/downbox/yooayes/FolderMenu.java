@@ -79,6 +79,7 @@ public class FolderMenu {
     * This checks the directory to match torrent name patterns
     *
     * @param  objLocation  the directory for which to create a new menu item
+    * @param  booNotify    a boolean value indicating whether to show a notification
     */
     public static void addMenuItem(final Path objLocation, final Boolean booNotify) throws Exception {
 
