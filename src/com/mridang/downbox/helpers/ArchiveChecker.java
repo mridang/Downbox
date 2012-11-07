@@ -47,7 +47,7 @@ public class ArchiveChecker {
 
             byte[] bytSignature = new byte[] {0x52, 0x61, 0x72, 0x21, 0x1a, 0x07, 0x00};
             byte[] bytHeader = new byte[7];
-            Integer intNumberofBytesRead = fisFileInputStream.read(bytHeader);
+            fisFileInputStream.read(bytHeader);
 
             if (Arrays.equals(bytHeader, bytSignature)) {
                 return true;
@@ -72,7 +72,7 @@ public class ArchiveChecker {
         try (FileInputStream fisFileInputStream = new FileInputStream(filFile)) {
 
             byte[] bytHeader = new byte[12];
-            Integer intNumberofBytesRead = fisFileInputStream.read(bytHeader);
+            fisFileInputStream.read(bytHeader);
             BitSet bitFlags = BitSet.valueOf(new byte[]{bytHeader[10], bytHeader[11]});
 
             if (bitFlags.get(8)) {
