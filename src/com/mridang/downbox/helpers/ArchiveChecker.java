@@ -25,50 +25,65 @@ package com.mridang.downbox.helpers;
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Arrays;
+import java.util.BitSet;
 
 /**
  * Class to check file header to determine if it is a archive
  */
 public class ArchiveChecker {
 
-   /**
-    * Checks whether a file is an archive
-    *
-    * @param    filFile        the file to checks
-    * @retuns                  a bollean value indicating the result
-    */
+    /*
+     * Checks whether a file is an archive
+     *
+     * @param   filFile  the file to check
+     * @returns          a boolean value indicating the result
+     */
     public static Boolean isArchive(File filFile) {
 
         try (FileInputStream fisFileInputStream = new FileInputStream(filFile)) {
 
             byte[] bytSignature = new byte[] {0x52, 0x61, 0x72, 0x21, 0x1a, 0x07, 0x00};
-            byte[] bytHeader = new byte[20];
+            byte[] bytHeader = new byte[7];
             Integer intNumberofBytesRead = fisFileInputStream.read(bytHeader);
 
-            Short shoFlags = (short) (((bytHeader[10]&0xFF)<<8) | (bytHeader[11]&0xFF));
-
-            if (Arrays.equals(Arrays.copyOfRange(bytHeader, 0, 7), bytSignature)) {
-  
-                if ((shoFlags & 0x0100) != 0) {
-
-                    if ((shoFlags & 0x0001) != 0) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-
-                } else {
-                    return true;
-                }
+            if (Arrays.equals(bytHeader, bytSignature)) {
+                return true;
             } else {
                 return false;
             }
 
         } catch (Exception e) {
             return false;
-        } 
+        }
+
+    }
+
+    /*
+     * Checks whether a file is the first file in a spanned archive
+     *
+     * @param   filFile  the archive to check
+     * @returns          a boolean value indicating the result
+     */
+    public static Boolean isFirstFileInSpannedArchive(File filFile) {
+
+        try (FileInputStream fisFileInputStream = new FileInputStream(filFile)) {
+
+            byte[] bytHeader = new byte[12];
+            Integer intNumberofBytesRead = fisFileInputStream.read(bytHeader);
+            BitSet bitFlags = BitSet.valueOf(new byte[]{bytHeader[10], bytHeader[11]});
+
+            if (bitFlags.get(8)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
 
     }
 
