@@ -41,84 +41,81 @@ import com.mridang.downbox.yooayes.FolderMenu;
 
 public class Downbox {
 
-	/**
-	 * The system tray class
-	 */
-	private static SysTray guiTray;
+    /**
+     * The system tray class
+     */
+    private static SysTray guiTray;
 
-	/**
-	 * The main procedure that is called when running the application
-	 *
-	 * @param strArguments
-	 *            the line of arguments passed to the application
-	 */
-	public static void main(String[] strArguments) {
+    /**
+     * The main procedure that is called when running the application
+     *
+     * @param  strArguments  the line of arguments passed to the application
+     */
+    public static void main(String[] strArguments) {
 
-		ApplicationData.loadData();
-		FolderDatabase.loadData();
+        ApplicationData.loadData();
+        FolderDatabase.loadData();
 
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-		}
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
 
-		if (strArguments.length != 0) {
+        if (strArguments.length != 0) {
 
-			guiTray = new SysTray();
+            guiTray = new SysTray();
 
-			try {
-				guiTray.start();
-				Thread.sleep(1000);
-			} catch (Exception e) {
-				ExceptionHandler.saveError(e);
-			}
+            try {
+                guiTray.start();
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                ExceptionHandler.saveError(e);
+            }
 
-			FolderMenu.getMenuItems(Paths.get(System.getProperty("user.home"),
-					"Downloads")); // TODO: This should be a new thread
+            FolderMenu.getMenuItems(Paths.get(System.getProperty("user.home"), "Downloads")); // TODO: This should be a new thread
 
-			ArgumentParser argParser = new ArgumentParser();
+            ArgumentParser argParser = new ArgumentParser();
 
-			try {
-				argParser.run(StringUtils.join(strArguments));
-				Thread.sleep(1000);
-			} catch (Exception e) {
-				ExceptionHandler.saveError(e);
-			}
+            try {
+                argParser.run(StringUtils.join(strArguments));
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                ExceptionHandler.saveError(e);
+            }
 
-		} else {
+        } else {
 
-			guiTray = new SysTray();
+            guiTray = new SysTray();
 
-			try {
-				guiTray.start();
-				Thread.sleep(1000);
-			} catch (Exception e) {
-				ExceptionHandler.saveError(e);
-				e.printStackTrace();
-			}
+            try {
+                guiTray.start();
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                ExceptionHandler.saveError(e);
+                e.printStackTrace();
+            }
 
-			FolderMenu.getMenuItems(Paths.get(System.getProperty("user.home"),
-					"Downloads")); // TODO: This should be a new thread
+            FolderMenu.getMenuItems(Paths.get(System.getProperty("user.home"), "Downloads")); // TODO: This should be a new thread
 
-			DirectoryMonitor bakWatcher = new DirectoryMonitor();
+            DirectoryMonitor bakWatcher = new DirectoryMonitor();
 
-			try {
-				bakWatcher.start();
-				Thread.sleep(1000);
-			} catch (Exception e) {
-				ExceptionHandler.saveError(e);
-			}
+            try {
+                bakWatcher.start();
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                ExceptionHandler.saveError(e);
+            }
 
-		}
+        }
 
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-		}
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+        }
 
-		FolderDatabase.saveData();
-		ApplicationData.saveData();
+        FolderDatabase.saveData();
+        ApplicationData.saveData();
 
-	}
+    }
 
 }

@@ -1,4 +1,5 @@
 package com.mridang.downbox.threads.backend.rename;
+
 /*
  *  (c) Copyright (c) 2012 Mridang Agarwalla
  *  All rights reserved.
@@ -24,7 +25,7 @@ package com.mridang.downbox.threads.backend.rename;
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 import java.util.logging.Logger;
 
 import com.mridang.downbox.helpers.ExceptionHandler;
@@ -32,10 +33,10 @@ import com.mridang.downbox.threads.ApplicationData;
 import com.mridang.downbox.threads.backend.rename.lookups.MovieSearcher;
 import com.mridang.downbox.threads.backend.rename.lookups.MusicSearcher;
 
-
 public class NameCorrector {
 
-   /** The logger instance that will provide all the logger functionality
+   /**
+    * The logger instance that will provide all the logger functionality
     */
     private static Logger logger = Logger.getLogger("downbox");
 
@@ -43,7 +44,7 @@ public class NameCorrector {
     * Cleans the name of a movie filename
     *
     * @param  strFileName  the file name from which to strip URLs
-    * @return              returns the cleaned file name
+    * @return returns the cleaned file name
     */
     public static String correctMovieName(String strFileName) {
         logger.info("Cleaning the movie name");
@@ -52,7 +53,7 @@ public class NameCorrector {
         strFileName = removeBrackets(strFileName);
         strFileName = removeSpecialChars(strFileName);
         strFileName = stripSpam(strFileName);
-        //strFileName = removeURLs(strFileName);
+        // strFileName = removeURLs(strFileName);
         strFileName = getMovieTitle(strFileName);
 
         logger.finer(String.format("The cleaned name is: %s", strFileName));
@@ -60,56 +61,53 @@ public class NameCorrector {
         return strFileName;
     }
 
-
    /**
     * Gets the movie name from AllMovie
     *
     * @param  strFileName  the file name to search from AllMovie
-    * @return              returns the cleaned file name
+    * @return returns the cleaned file name
     */
     private static String getMovieTitle(String strFileName) {
 
-    	try {
+        try {
+            logger.finer("Fetching correct name for the movie");
 
-    		logger.finer("Fetching correct name for the movie");
+            for (Integer intId = 0; intId < strFileName.trim().replaceAll("\\s+", " ").split(" ").length; intId++) {
 
-    		for (Integer intId = 0; intId < strFileName.trim().replaceAll("\\s+", " ").split(" ").length; intId++) {
+                String strQuery = strFileName.trim().replaceAll("\\s+", " ");
 
-    			String strQuery = strFileName.trim().replaceAll("\\s+", " ");
+                for (Integer intCounter = 0; intCounter < intId; intCounter++) {
+                    strQuery = strQuery.replaceFirst("\\s?\\w+\\s?$", "");
+                }
 
-    			for (Integer intCounter = 0; intCounter < intId; intCounter++) {
-    				strQuery = strQuery.replaceFirst("\\s?\\w+\\s?$", "");
-    			}
+                logger.finest(String.format("Searching for %s", strQuery));
 
-    			logger.finest(String.format("Searching for %s", strQuery));
+                // TODO Use the year for comparison too to get a more accurate match
+                BestMatch objMatch = MovieSearcher.getBestMatch(strQuery);
 
-    			//TODO Use the year for comparison too to get a more accurate match
-    			BestMatch objMatch = MovieSearcher.getBestMatch(strQuery);
+                if (objMatch != null) {
+                    strFileName = objMatch.getTitle();
+                    break;
+                }
 
-    			if (objMatch != null) {
-    				strFileName = objMatch.getTitle();
-    				break;
-    			}
+            }
 
-    		}
+            logger.finer(String.format("Fetched correct name: %s", strFileName));
 
-    		logger.finer(String.format("Fetched correct name: %s", strFileName));
+        } catch (Exception e) {
+            logger.warning("An error occurred when get the movie title");
+            ExceptionHandler.saveError(e);
+        }
 
-    	} catch (Exception e) {
-    		logger.warning("An error occurred when get the movie title");
-    		ExceptionHandler.saveError(e);
-    	}
-
-    	return strFileName;
+        return strFileName;
 
     }
-
 
    /**
     * Strips spam words from the filename
     *
-    * @param  strFileName the file name from which to strip spam words
-    * @return             the filename with the spam words stripped off
+    * @param  strFileName  the file name from which to strip spam words
+    * @return the filename with the spam words stripped off
     */
     private static String stripSpam(String strFileName) {
 
@@ -137,12 +135,11 @@ public class NameCorrector {
 
     }
 
-
    /**
     * Removes all the special characters from the file name.
     *
     * @param  strFileName  the file name from which to remove special characters
-    * @return              returns the cleaned file name
+    * @return returns the cleaned file name
     */
     private static String removeSpecialChars(String strFileName) {
 
@@ -154,7 +151,8 @@ public class NameCorrector {
             strFileName = strFileName.replace("-", "");
             strFileName = strFileName.replace("_", " ");
 
-            logger.finer(String.format("Removed special characters from the filename: %s", strFileName));
+            logger.finer(String.format("Removed special characters from the filename: %s",
+                    strFileName));
 
         } catch (Exception e) {
             logger.warning("An error occurred when trying to remove remove special characters");
@@ -165,16 +163,15 @@ public class NameCorrector {
 
     }
 
-
    /**
     * Gets the the album name from AllMusic
     *
     * @param  strFileName  the file name to search from AllMusic
-    * @return              returns the cleaned file name
+    * @return returns the cleaned file name
     */
     private static String getAlbumName(String strFileName) {
 
-         try {
+        try {
 
             logger.finer("Fetching correct name for the album");
 
@@ -188,7 +185,8 @@ public class NameCorrector {
 
                 logger.finest(String.format("Searching for %s", strQuery));
 
-                //TODO Use the year for comparison too to get a more accurate match
+                // TODO Use the year for comparison too to get a more accurate
+                // match
                 BestMatch objMatch = MusicSearcher.getBestMatch(strQuery);
 
                 if (objMatch != null) {
@@ -205,16 +203,15 @@ public class NameCorrector {
             ExceptionHandler.saveError(e);
         }
 
-         return strFileName;
+        return strFileName;
 
     }
-
 
    /**
     * Removes all the brackets from the file name.
     *
     * @param  strFileName  the file name from which to remove brackets
-    * @return              returns the cleaned file name
+    * @return returns the cleaned file name
     */
     private static String removeBrackets(String strFileName) {
 
@@ -237,12 +234,11 @@ public class NameCorrector {
 
     }
 
-
    /**
     * Cleans the name of a music filename
     *
     * @param  strFileName  the file name from which to strip URLs
-    * @return              returns the cleaned file name
+    * @return returns the cleaned file name
     */
     public static String correctAlbumName(String strFileName) {
         logger.info("Cleaning the album name");
@@ -251,7 +247,7 @@ public class NameCorrector {
         strFileName = removeBrackets(strFileName);
         strFileName = removeSpecialChars(strFileName);
         strFileName = stripSpam(strFileName);
-        //strFileName = removeURLs(strFileName);
+        // strFileName = removeURLs(strFileName);
         strFileName = getAlbumName(strFileName);
 
         logger.finer(String.format("The cleaned name is: %s", strFileName));

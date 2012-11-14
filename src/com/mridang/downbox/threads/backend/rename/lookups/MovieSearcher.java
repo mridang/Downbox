@@ -45,7 +45,7 @@ public class MovieSearcher {
 
         try {
 
-			String strURL = "http://www.allmovie.com/search/movies/" + URLEncoder.encode(strTitle, "utf-8");
+            String strURL = "http://www.allmovie.com/search/movies/" + URLEncoder.encode(strTitle, "utf-8");
             Document objDocument = Jsoup.connect(strURL).get();
 
             for (Element objResult : objDocument.select("ul[class=results]").select("li")) {

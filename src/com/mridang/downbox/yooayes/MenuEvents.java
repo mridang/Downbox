@@ -70,7 +70,7 @@ public class MenuEvents {
             new Thread(
                 new Runnable() {
                     @Override
-					public void run() {
+                    public void run() {
                         try {
                             ProcessingStatus.disableMenu();
                             BackendProcessor.processDirectory(new File(Paths.get(System.getProperty("user.home"), "Downloads").toFile(), strDirectory));
@@ -130,7 +130,7 @@ public class MenuEvents {
             new Thread(
                 new Runnable() {
                     @Override
-					public void run() {
+                    public void run() {
                         try {
                             ProcessingStatus.disableMenu();
                             ProcessingStatus.enableMenu();

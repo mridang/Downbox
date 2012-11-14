@@ -39,7 +39,7 @@ public class ArgumentParser extends Thread {
     */
     public void run(String strArguments) {
 
-    	Scanner scaScanner = new Scanner(strArguments);
+        Scanner scaScanner = new Scanner(strArguments);
 
         try {
 
@@ -69,7 +69,7 @@ public class ArgumentParser extends Thread {
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
         } finally {
-        	scaScanner.close();
+            scaScanner.close();
         }
 
         return;

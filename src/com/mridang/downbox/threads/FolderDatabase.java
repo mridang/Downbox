@@ -54,7 +54,7 @@ public class FolderDatabase {
     * This saves the list of folders to the file
     */
     @SuppressWarnings("unchecked")
-	public static void loadData() {
+    public static void loadData() {
 
         try {
 

@@ -101,9 +101,9 @@ public class OpenSubtitles {
         String strHash = null;
 
         try (
-		       FileInputStream fisInputStream = new FileInputStream(filVideoFile);
-    		   FileChannel fchFileChannel = fisInputStream.getChannel())
-    		   {
+           FileInputStream fisInputStream = new FileInputStream(filVideoFile);
+           FileChannel fchFileChannel = fisInputStream.getChannel())
+           {
 
            logger.info(String.format("Hashing the video file: %s", filVideoFile.getName()));
 

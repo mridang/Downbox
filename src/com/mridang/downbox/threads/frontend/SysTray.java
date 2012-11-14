@@ -59,7 +59,7 @@ public class SysTray extends Thread {
     * @returns
     */
     @Override
-	public void run() {
+    public void run() {
 
         Display display = new Display();
         shell = new Shell(display);
@@ -74,7 +74,7 @@ public class SysTray extends Thread {
 
         itmTrayItem.addListener(SWT.MenuDetect, new Listener() {
             @Override
-			public void handleEvent(Event event) {
+            public void handleEvent(Event event) {
                 mnuPopup.setVisible(booShow);
             }
         });
@@ -83,7 +83,7 @@ public class SysTray extends Thread {
         mimOpenFolder.setText(LocalStrings.getText("openFolder"));
         mimOpenFolder.addListener(SWT.Selection, new Listener() {
             @Override
-			public void handleEvent(Event event) {
+            public void handleEvent(Event event) {
                 MenuEvents.openFolder();
             }
         });
@@ -92,14 +92,14 @@ public class SysTray extends Thread {
         mimLaunchDownboxWebsite.setText(LocalStrings.getText("launchWebsite"));
         mimLaunchDownboxWebsite.addListener(SWT.Selection, new Listener() {
             @Override
-			public void handleEvent(Event event) {
+            public void handleEvent(Event event) {
                 MenuEvents.launchWebsite();
             }
         });
 
         //Separator
         @SuppressWarnings("unused")
-		MenuItem mimFirstSeparator = new MenuItem(mnuPopup, SWT.SEPARATOR);
+        MenuItem mimFirstSeparator = new MenuItem(mnuPopup, SWT.SEPARATOR);
 
         MenuItem mimRecentlyCleanedDirectories = new MenuItem(mnuPopup, SWT.CASCADE);
         mimRecentlyCleanedDirectories.setText(LocalStrings.getText("directoriesToProcess"));
@@ -108,7 +108,7 @@ public class SysTray extends Thread {
 
         //Separator
         @SuppressWarnings("unused")
-		MenuItem mimSecondSeparator = new MenuItem(mnuPopup, SWT.SEPARATOR);
+        MenuItem mimSecondSeparator = new MenuItem(mnuPopup, SWT.SEPARATOR);
 
         mimStatus = new MenuItem(mnuPopup, SWT.PUSH);
         mimStatus.setText(LocalStrings.getText("idleWaiting"));
@@ -116,7 +116,7 @@ public class SysTray extends Thread {
 
         //Separator
         @SuppressWarnings("unused")
-		MenuItem mimThirdSeparator = new MenuItem(mnuPopup, SWT.SEPARATOR);
+        MenuItem mimThirdSeparator = new MenuItem(mnuPopup, SWT.SEPARATOR);
 
         MenuItem mimFreshlyProcessedDirectories = new MenuItem(mnuPopup, SWT.CASCADE);
         mimFreshlyProcessedDirectories.setText(LocalStrings.getText("freshlyProcessedDirectories"));
@@ -125,13 +125,13 @@ public class SysTray extends Thread {
 
         //Separator
         @SuppressWarnings("unused")
-		MenuItem mimFourthSeparator = new MenuItem(mnuPopup, SWT.SEPARATOR);
+        MenuItem mimFourthSeparator = new MenuItem(mnuPopup, SWT.SEPARATOR);
 
         MenuItem mimRecheckFolders = new MenuItem(mnuPopup, SWT.PUSH);
         mimRecheckFolders.setText(LocalStrings.getText("recheckFolders"));
         mimRecheckFolders.addListener(SWT.Selection, new Listener() {
             @Override
-			public void handleEvent(Event event) {
+            public void handleEvent(Event event) {
                 MenuEvents.recheckDirectory();
             }
         });
@@ -140,14 +140,14 @@ public class SysTray extends Thread {
         mimExit.setText(LocalStrings.getText("exitApplication"));
         mimExit.addListener(SWT.Selection, new Listener() {
             @Override
-			public void handleEvent(Event event) {
+            public void handleEvent(Event event) {
                 MenuEvents.quitApplication();
             }
         });
 
         itmTrayItem.addListener(SWT.DefaultSelection, new Listener() {
             @Override
-			public void handleEvent(Event event) {
+            public void handleEvent(Event event) {
                 MenuEvents.openFolder();
             }
         });

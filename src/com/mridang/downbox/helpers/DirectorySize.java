@@ -86,56 +86,56 @@ public class DirectorySize {
             }
             else {
                 if (ArchiveChecker.isArchive(filItem)) {
-                	if (ArchiveChecker.isFirstFileInSpannedArchive(filItem)) {
-	                    try {
-	                        for (FileHeader objHeader : (new Archive(filItem)).getFileHeaders()) {
-	                            if (strExtensions == null) {
-                                	if (setProcessed.contains(objHeader.getFileNameString())) {
-                                		continue;
-                                	} else {
-                                		lngSize += objHeader.getFullUnpackSize();
-                                		setProcessed.add(objHeader.getFileNameString());
-                                		break;
-                                	}
-	                            }
-	                            else {
-	                                for(String strExtension : strExtensions) {
-	                                    if (FileExtention.getExtention(objHeader.getFileNameString()).equalsIgnoreCase(strExtension)) {
-	                                    	if (setProcessed.contains(objHeader.getFileNameString())) {
-	                                    		continue;
-	                                    	} else {
-	                                    		lngSize += objHeader.getFullUnpackSize();
-	                                    		setProcessed.add(objHeader.getFileNameString());
-	                                    		break;
-	                                    	}
-	                                    }
-	                                }
-	                            }
-	                        }
-	                    } catch (Exception e) {
-	                        continue;
-	                    }
-                	}
+                    if (ArchiveChecker.isFirstFileInSpannedArchive(filItem)) {
+                        try {
+                            for (FileHeader objHeader : (new Archive(filItem)).getFileHeaders()) {
+                                if (strExtensions == null) {
+                                    if (setProcessed.contains(objHeader.getFileNameString())) {
+                                        continue;
+                                    } else {
+                                        lngSize += objHeader.getFullUnpackSize();
+                                        setProcessed.add(objHeader.getFileNameString());
+                                        break;
+                                    }
+                                }
+                                else {
+                                    for(String strExtension : strExtensions) {
+                                        if (FileExtention.getExtention(objHeader.getFileNameString()).equalsIgnoreCase(strExtension)) {
+                                            if (setProcessed.contains(objHeader.getFileNameString())) {
+                                                continue;
+                                            } else {
+                                                lngSize += objHeader.getFullUnpackSize();
+                                                setProcessed.add(objHeader.getFileNameString());
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (Exception e) {
+                            continue;
+                        }
+                    }
                 } else {
                     if (strExtensions == null) {
-                    	if (setProcessed.contains(filItem.getName())) {
-                    		continue;
-                    	} else {
-                    		lngSize += filItem.length();
-                    		setProcessed.add(filItem.getName());
-                    		break;
-                    	}
+                        if (setProcessed.contains(filItem.getName())) {
+                            continue;
+                        } else {
+                            lngSize += filItem.length();
+                            setProcessed.add(filItem.getName());
+                            break;
+                        }
                     }
                     else {
                         for(String strExtension : strExtensions) {
                             if (FileExtention.getExtention(filItem.getName()).equalsIgnoreCase(strExtension)) {
-                            	if (setProcessed.contains(filItem.getName())) {
-                            		continue;
-                            	} else {
-                            		lngSize += filItem.length();
-                            		setProcessed.add(filItem.getName());
-                            		break;
-                            	}
+                                if (setProcessed.contains(filItem.getName())) {
+                                    continue;
+                                } else {
+                                    lngSize += filItem.length();
+                                    setProcessed.add(filItem.getName());
+                                    break;
+                                }
                             }
                         }
                     }

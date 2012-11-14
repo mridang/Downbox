@@ -86,7 +86,7 @@ public class RarExtractor {
         } catch (IOException e) {
             throw new Exception();
         }  finally {
-        	arcArchive.close();
+            arcArchive.close();
         }
 
         logger.fine("Extracted.");

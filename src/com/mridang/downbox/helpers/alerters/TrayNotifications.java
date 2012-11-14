@@ -39,57 +39,53 @@ import com.mridang.downbox.threads.frontend.SysTray;
  */
 public class TrayNotifications {
 
-	/**
-	 * This shows a tray notification.
-	 *
-	 * @param strTitle
-	 *            the title of the message to be shown
-	 * @param strMessage
-	 *            the message to be shown
-	 */
-	public static void showNotification(final String strTitle,
-			final String strMessage) {
+    /**
+     * This shows a tray notification.
+     *
+     * @param  strTitle    the title of the message to be shown
+     * @param  strMessage  the message to be shown
+     */
+    public static void showNotification(final String strTitle, final String strMessage) {
 
-		if (Display.getDefault() == null) {
+        if (Display.getDefault() == null) {
 
-			Display display = new Display();
-			Shell shell = new Shell(display);
-			MessageBox objError = new MessageBox(shell, SWT.ICON_INFORMATION);
-			objError.setMessage(strMessage);
-			objError.open();
-			shell.getDisplay().dispose();
-			System.exit(1);
-			shell.open();
-			while (!shell.isDisposed()) {
-			    if (display.readAndDispatch()) {
-			        display.sleep();
-			    }
-			}
-			display.dispose();
+            Display display = new Display();
+            Shell shell = new Shell(display);
+            MessageBox objError = new MessageBox(shell, SWT.ICON_INFORMATION);
+            objError.setMessage(strMessage);
+            objError.open();
+            shell.getDisplay().dispose();
+            System.exit(1);
+            shell.open();
+            while (!shell.isDisposed()) {
+                if (display.readAndDispatch()) {
+                    display.sleep();
+                }
+            }
+            display.dispose();
 
-		}
+        }
 
-		Display.getDefault().asyncExec(new Runnable() {
+        Display.getDefault().asyncExec(new Runnable() {
 
-			@Override
-			public void run() {
-				try {
+            @Override
+            public void run() {
+                try {
 
-					final ToolTip objNotification = new ToolTip(SysTray.shell,
-							SWT.BALLOON | SWT.ICON_INFORMATION);
-					objNotification.setMessage(strMessage);
-					objNotification.setText(strTitle);
-					SysTray.itmTrayItem.setToolTip(objNotification);
-					objNotification.setVisible(true);
+                    final ToolTip objNotification = new ToolTip(SysTray.shell, SWT.BALLOON | SWT.ICON_INFORMATION);
+                    objNotification.setMessage(strMessage);
+                    objNotification.setText(strTitle);
+                    SysTray.itmTrayItem.setToolTip(objNotification);
+                    objNotification.setVisible(true);
 
-				} catch (Exception e) {
-					e.printStackTrace(); // Nothing to be handled here.
-				}
+                } catch (Exception e) {
+                    e.printStackTrace(); // Nothing to be handled here.
+                }
 
-			}
+            }
 
-		});
+        });
 
-	}
+    }
 
 }

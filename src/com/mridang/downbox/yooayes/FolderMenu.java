@@ -93,7 +93,7 @@ public class FolderMenu {
                     objFolderMenuItem.setText(objLocation.getFileName().toString());
                     objFolderMenuItem.addListener(SWT.Selection, new Listener() {
                         @Override
-						public void handleEvent(Event event) {
+                        public void handleEvent(Event event) {
                             MenuEvents.processDirectory(((MenuItem) event.widget).getText());
                         }
                     });

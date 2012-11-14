@@ -41,7 +41,7 @@ public class DirectoryMonitor extends Thread {
     * This monitors the directory and raises events.
     */
     @Override
-	public void run() {
+    public void run() {
 
         try {
 

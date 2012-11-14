@@ -38,56 +38,53 @@ import com.mridang.downbox.threads.frontend.SysTray;
  */
 public class ErrorMessages {
 
-	/**
-	 * This shows an error message dialog box and quits the application.
-	 *
-	 * @param strTitle
-	 *            the title of the message to be shown
-	 * @param strMessage
-	 *            the message to be shown
-	 */
-	public static void showErrorMessage(final String strMessage) {
+    /**
+     * This shows an error message dialog box and quits the application.
+     *
+     * @param  strTitle    the title of the message to be shown
+     * @param  strMessage  the message to be shown
+     */
+    public static void showErrorMessage(final String strMessage) {
 
-		if (Display.getCurrent() == null) {
+        if (Display.getCurrent() == null) {
 
-			Display display = new Display();
-			Shell shell = new Shell(display);
-			MessageBox objError = new MessageBox(shell, SWT.ICON_ERROR);
-			objError.setMessage(strMessage);
-			objError.open();
-			shell.getDisplay().dispose();
-			System.exit(1);
-			shell.open();
-			while (!shell.isDisposed()) {
-			    if (display.readAndDispatch()) {
-			        display.sleep();
-			    }
-			}
-			display.dispose();
+            Display display = new Display();
+            Shell shell = new Shell(display);
+            MessageBox objError = new MessageBox(shell, SWT.ICON_ERROR);
+            objError.setMessage(strMessage);
+            objError.open();
+            shell.getDisplay().dispose();
+            System.exit(1);
+            shell.open();
+            while (!shell.isDisposed()) {
+                if (display.readAndDispatch()) {
+                    display.sleep();
+                }
+            }
+            display.dispose();
 
-		}
+        }
 
-		Display.getDefault().asyncExec(new Runnable() {
+        Display.getDefault().asyncExec(new Runnable() {
 
-			@Override
-			public void run() {
-				try {
+            @Override
+            public void run() {
+                try {
 
-					MessageBox objError = new MessageBox(SysTray.shell,
-							SWT.ICON_ERROR);
-					objError.setMessage(strMessage);
-					objError.open();
-					SysTray.shell.getDisplay().dispose();
-					System.exit(1);
+                    MessageBox objError = new MessageBox(SysTray.shell, SWT.ICON_ERROR);
+                    objError.setMessage(strMessage);
+                    objError.open();
+                    SysTray.shell.getDisplay().dispose();
+                    System.exit(1);
 
-				} catch (Exception e) {
-					e.printStackTrace(); // Nothing to be handled here.
-				}
+                } catch (Exception e) {
+                    e.printStackTrace(); // Nothing to be handled here.
+                }
 
-			}
+            }
 
-		});
+        });
 
-	}
+    }
 
 }

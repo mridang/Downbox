@@ -89,7 +89,7 @@ public class ContentCopier {
             logger.fine("Copied.");
 
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
             logger.warning("There was an error copying the files");
             throw e;
         }
