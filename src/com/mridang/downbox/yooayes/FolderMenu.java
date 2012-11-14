@@ -99,7 +99,7 @@ public class FolderMenu {
                     });
 
                     if (booNotify == true) {
-                        TrayNotifications.showNotification(LocalStrings.getText("newItemsAdded"), LocalStrings.getText("itemAddedToApplication"));
+                        TrayNotifications.show(LocalStrings.getText("newItemsAdded"), LocalStrings.getText("itemAddedToApplication"));
                     }
 
                 } catch (Exception e) {

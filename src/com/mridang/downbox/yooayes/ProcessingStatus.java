@@ -47,7 +47,7 @@ public class ProcessingStatus {
     */
     public static void startProcessing(String strDirectory) {
 
-        TrayNotifications.showNotification(LocalStrings.getText("processingItem"), String.format(LocalStrings.getText("itemUnderProcessingByApplication"), strDirectory));
+        TrayNotifications.show(LocalStrings.getText("processingItem"), String.format(LocalStrings.getText("itemUnderProcessingByApplication"), strDirectory));
 
         Display.getDefault().asyncExec(new Runnable() {
 
@@ -119,7 +119,7 @@ public class ProcessingStatus {
 
         });
 
-        TrayNotifications.showNotification(LocalStrings.getText("itemProcessed"), String.format(LocalStrings.getText("itemProcessedByApplication"), strDirectory));
+        TrayNotifications.show(LocalStrings.getText("itemProcessed"), String.format(LocalStrings.getText("itemProcessedByApplication"), strDirectory));
 
     }
 

@@ -45,7 +45,7 @@ public class TrayNotifications {
      * @param  strTitle    the title of the message to be shown
      * @param  strMessage  the message to be shown
      */
-    public static void showNotification(final String strTitle, final String strMessage) {
+    public static void show(final String strTitle, final String strMessage) {
 
         if (Display.getDefault() == null) {
 
