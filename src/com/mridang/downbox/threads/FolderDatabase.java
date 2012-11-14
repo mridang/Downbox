@@ -58,14 +58,40 @@ public class FolderDatabase {
 
         try {
 
-              FileInputStream objFileInputStream;
+
+              //We should try and use a folders file in the same directory if one exists. If one
+              //doesn't exist, we will try and use the on in the platform's default data directory.
+              File filFolders;
               if ((new File("folders.lst")).exists()) {
-                  File filFolders = new File("folders.lst");
-                  objFileInputStream = new FileInputStream(filFolders);
+                  filFolders = new File("folders.lst");
               } else {
-                  File filFolders = new File(DataDirectory.getDefaultDataDirectory(), "folders.lst");
-                  objFileInputStream = new FileInputStream(filFolders);
+                  //If the default data directory doesn't exist, we will try and create it.
+                  filFolders = new File(DataDirectory.getDefaultDataDirectory(), "folders.lst");
+                  if (!filFolders.exists()) {
+                      if (!filFolders.getParentFile().exists()) {
+                          Boolean booSuccessfullyCreatedDirectory = filFolders.getParentFile().mkdirs();
+                          if (!booSuccessfullyCreatedDirectory) {
+                              throw new IOException(LocalStrings.getText("errFolderDatabaseUnableToWriteError"));
+                          }
+                      }
+                      //We will also try and create an empty folders file.
+                      Boolean booSuccessfullyCreatedFile = filFolders.createNewFile();
+                      if (!booSuccessfullyCreatedFile) {
+                          throw new IOException(LocalStrings.getText("errFolderDatabaseUnableToWriteError"));
+                      } else {
+                          FileOutputStream objFileOutputStream = new FileOutputStream(filFolders);
+                          ObjectOutputStream objObjectOutputStream = new ObjectOutputStream(objFileOutputStream);
+                          objObjectOutputStream.writeObject(new ArrayList<String>());
+                          objObjectOutputStream.close();
+                      }
+                  }
               }
+
+              //Okay, so we've probabaly found an existing folders file by now, created an empty one
+              //if one didn't exist or thrown an exception we were unable to create one so we can
+              //now use try to read/write serialized data from/to the file.
+              FileInputStream objFileInputStream;
+              objFileInputStream = new FileInputStream(filFolders);
               ObjectInputStream objObjectInputStream = new ObjectInputStream(objFileInputStream);
               objFolders = (ArrayList<String>) objObjectInputStream.readObject();
               objObjectInputStream.close();
@@ -129,14 +155,40 @@ public class FolderDatabase {
 
         try {
 
-              FileOutputStream objFileOutputStream;
+
+              //We should try and use a folders file in the same directory if one exists. If one
+              //doesn't exist, we will try and use the on in the platform's default data directory.
+              File filFolders;
               if ((new File("folders.lst")).exists()) {
-                  File filFolders = new File("folders.lst");
-                  objFileOutputStream = new FileOutputStream(filFolders);
+                  filFolders = new File("folders.lst");
               } else {
-                  File filFolders = new File(DataDirectory.getDefaultDataDirectory(), "folders.lst");
-                  objFileOutputStream = new FileOutputStream(filFolders);
+                  //If the default data directory doesn't exist, we will try and create it.
+                  filFolders = new File(DataDirectory.getDefaultDataDirectory(), "folders.lst");
+                  if (!filFolders.exists()) {
+                      if (!filFolders.getParentFile().exists()) {
+                          Boolean booSuccessfullyCreatedDirectory = filFolders.getParentFile().mkdirs();
+                          if (!booSuccessfullyCreatedDirectory) {
+                              throw new IOException(LocalStrings.getText("errFolderDatabaseUnableToWriteError"));
+                          }
+                      }
+                      //We will also try and create an empty folders file.
+                      Boolean booSuccessfullyCreatedFile = filFolders.createNewFile();
+                      if (!booSuccessfullyCreatedFile) {
+                          throw new IOException(LocalStrings.getText("errFolderDatabaseUnableToWriteError"));
+                      } else {
+                          FileOutputStream objFileOutputStream = new FileOutputStream(filFolders);
+                          ObjectOutputStream objObjectOutputStream = new ObjectOutputStream(objFileOutputStream);
+                          objObjectOutputStream.writeObject(new ArrayList<String>());
+                          objObjectOutputStream.close();
+                      }
+                  }
               }
+
+              //Okay, so we've probabaly found an existing folders file by now, created an empty one
+              //if one didn't exist or thrown an exception we were unable to create one so we can
+              //now use try to read/write serialized data from/to the file.
+              FileOutputStream objFileOutputStream;
+              objFileOutputStream = new FileOutputStream(filFolders);
               ObjectOutputStream objObjectOutputStream = new ObjectOutputStream(objFileOutputStream);
               objObjectOutputStream.writeObject(objFolders);
               objObjectOutputStream.close();
