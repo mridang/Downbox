@@ -76,7 +76,7 @@ public class BackendProcessor {
             } catch (SecurityException e) {
                 e.printStackTrace();
             } finally {
-                ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
+                ErrorMessages.show(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
             }
         }
 
@@ -93,7 +93,7 @@ public class BackendProcessor {
             } catch (SecurityException e) {
                 e.printStackTrace();
             } finally {
-                ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
+                ErrorMessages.show(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
             }
         }
 
@@ -111,7 +111,7 @@ public class BackendProcessor {
             } catch (SecurityException e) {
                 e.printStackTrace();
             } finally {
-                ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
+                ErrorMessages.show(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
             }
         }
 
@@ -124,7 +124,7 @@ public class BackendProcessor {
             logger.finer("All subtitles fetched.");
 
         } catch (Exception ex) {
-            ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
+            ErrorMessages.show(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
         }
 
 
@@ -141,7 +141,7 @@ public class BackendProcessor {
             } catch (SecurityException e) {
                 e.printStackTrace();
             } finally {
-                ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
+                ErrorMessages.show(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
             }
         }
 
@@ -159,7 +159,7 @@ public class BackendProcessor {
             } catch (SecurityException e) {
                 e.printStackTrace();
             } finally {
-                ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
+                ErrorMessages.show(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
             }
         }
 

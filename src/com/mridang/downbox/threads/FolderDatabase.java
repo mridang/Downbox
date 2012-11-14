@@ -97,13 +97,13 @@ public class FolderDatabase {
               objObjectInputStream.close();
 
         } catch (FileNotFoundException e) {
-            ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseFileNotFound"));
+            ErrorMessages.show(LocalStrings.getText("errFolderDatabaseFileNotFound"));
         } catch (SecurityException e) {
-            ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseReadPermissionsError"));
+            ErrorMessages.show(LocalStrings.getText("errFolderDatabaseReadPermissionsError"));
         } catch (ClassNotFoundException e) {
-            ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
+            ErrorMessages.show(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
         } catch (IOException e) {
-            ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
+            ErrorMessages.show(LocalStrings.getText("errFolderDatabaseUnableToReadError"));
         }
 
    }
@@ -194,13 +194,13 @@ public class FolderDatabase {
               objObjectOutputStream.close();
 
         } catch (InvalidClassException e) {
-            ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseUnableToWriteError"));
+            ErrorMessages.show(LocalStrings.getText("errFolderDatabaseUnableToWriteError"));
         } catch (FileNotFoundException e) {
-            ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseFileNotFound"));
+            ErrorMessages.show(LocalStrings.getText("errFolderDatabaseFileNotFound"));
         } catch (SecurityException e) {
-            ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseWritePermissionsError"));
+            ErrorMessages.show(LocalStrings.getText("errFolderDatabaseWritePermissionsError"));
         } catch (IOException e) {
-            ErrorMessages.showErrorMessage(LocalStrings.getText("errFolderDatabaseUnableToWriteError"));
+            ErrorMessages.show(LocalStrings.getText("errFolderDatabaseUnableToWriteError"));
         }
 
    }

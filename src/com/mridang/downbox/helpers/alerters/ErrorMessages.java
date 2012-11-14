@@ -44,7 +44,7 @@ public class ErrorMessages {
      * @param  strTitle    the title of the message to be shown
      * @param  strMessage  the message to be shown
      */
-    public static void showErrorMessage(final String strMessage) {
+    public static void show(final String strMessage) {
 
         if (Display.getCurrent() == null) {
 
